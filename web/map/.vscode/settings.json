@@ -1,0 +1,10 @@
+{
+    "editor.formatOnSave": true,
+    "powermode.enabled": true,
+    "powermode.presets": "flames",
+    "powermode.shakeIntensity": 1,
+    "powermode.gifMode": "restart",
+    "powermode.explosionSize": 8,
+    "powermode.explosionOffset": 1,
+    "powermode.explosionFrequency": 1
+}

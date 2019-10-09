@@ -1,0 +1,15 @@
+agm-map {
+  cursor: pointer;
+  height: 100%;
+}
+
+.card-info {
+  width: auto;
+  height: auto;
+}
+
+.card-info .info {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 2px;
+}
