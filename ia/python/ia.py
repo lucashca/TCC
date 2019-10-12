@@ -66,8 +66,9 @@ def run(regression,totalIter,name):
     model = regression[0][1]
     model.fit(xTrain,yTrain)
     yPred = model.predict(xTest)
-    score = r2_score(yTest,yPred)
-    maior = score
+    #score = r2_score(yTest,yPred)
+    #maior = score
+    menorError = mean_squared_error(yTest,yPred)
     bestModel = []
     atual = 0
     for i,reg in enumerate(regression):
@@ -75,21 +76,31 @@ def run(regression,totalIter,name):
             model = reg[1]
             model.fit(xTrain,yTrain)
             yPred = model.predict(xTest)
-            score = r2_score(yTest,yPred)
+            #score = r2_score(yTest,yPred)
+            erro =  mean_squared_error(yTest,yPred)
+             
             if not totalIter % 2 == 0:
                 totalIter = totalIter + 1
 
            
             
             atual = atual+1
-
+            
             percent = (atual*100) / totalIter
-            print("%s %d/%d - %.2f / %.2f"%(name,atual, totalIter,percent,maior))
-                
+            #print("%s %d/%d - %.2f / %.2f"%(name,atual, totalIter,percent,maior))
+            print("%s %d/%d - %.2f / %.2f"%(name,atual, totalIter,percent,menorError))
 
+            if erro < menorError:
+            
+                menorError = erro
+                bestModel = reg
+            
+
+            '''
             if score > maior:
                 maior = score
                 bestModel = reg
+            '''
         except:
             pass
     return bestModel
@@ -102,12 +113,12 @@ def mainWork(regression,totalIter,name):
         model.fit(xTrain,yTrain)
         yPred = model.predict(xTest)
         score = r2_score(yTest,yPred)
-
+        mse = mean_squared_error(yTest,yPred)
 
         ax = plt.subplot(221,projection='3d')
         ax.scatter(dataSetNormalizada[:,0],dataSetNormalizada[:,1],dataSetNormalizada[:,yColunm] ,c=dataSetNormalizada[:,yColunm] ,cmap="coolwarm")
         m = str(bestModel[0])
-        ax.set_title("%s %s %s"% (name,m,score))
+        ax.set_title("%.5f %s %s %.5f"% (mse,name,m,score))
         
         
         ax1 = plt.subplot(222,projection='3d')
@@ -153,7 +164,9 @@ dataSetNormalizada = dataSet
 
 yColunm = 2
 
-xTrain,xTest,yTrain,yTest = train_test_split(dataSetNormalizada[:,:2],dataSetNormalizada[:,yColunm],test_size=0.2,random_state=0)
+bestRandomState = [25,0,18,20,21,23,24,28,39]
+
+xTrain,xTest,yTrain,yTest = train_test_split(dataSetNormalizada[:,:2],dataSetNormalizada[:,yColunm],test_size=0.3,random_state=25)
 regression = []
 
 ACTIVATION_TYPES = ["relu","logistic","tanh","identity"]
@@ -162,7 +175,7 @@ ALPHA = [0.00001,0.001,0.01,0.1,1]
 LEARNING_RATE_TYPES = ["constant","invscaling","adaptative"]
 
 
-'''
+''''
 for activation in ACTIVATION_TYPES:
     for solver in SOLVER_TYPES:
         for alfa in ALPHA:
@@ -174,12 +187,11 @@ for activation in ACTIVATION_TYPES:
                         regression.append([[activation,solver,alfa,lrt,r],MLPRegressor(hidden_layer_sizes=(10,10,10),activation=activation,solver=solver,alpha=alfa,learning_rate=lrt,max_iter=1000,random_state=r)])
 '''
 
-
-for depth in range(100):
-    for r in range(100):
-        #regression.append([[depth,r],DecisionTreeRegressor(max_depth=depth+100,random_state=r)])   
-        for s in range(100):
-            regression.append([[depth,r,s],RandomForestRegressor(max_depth=depth, random_state=r,n_estimators=s)])
+for depth in range(10):
+    for r in range(10):
+        #regression.append([[depth,r],DecisionTreeRegressor(max_depth=depth,random_state=r)])   
+        for s in range(10):
+            regression.append([[depth,r,s],RandomForestRegressor(max_depth=depth+100, random_state=r,n_estimators=s)])
     print(depth)
 
 
