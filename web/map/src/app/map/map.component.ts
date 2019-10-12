@@ -17,7 +17,7 @@ export class MapComponent implements OnInit {
 
   markers: Coordinates[] = [];
   userMarkers: Coordinates[] = [];
-  constructor(public mapService: MapService) {}
+  constructor(public mapService: MapService) { }
 
   amostras: Amostra[] = [];
 
@@ -39,18 +39,18 @@ export class MapComponent implements OnInit {
   parseAmostra(data) {
     this.amostras = [];
     for (let a of data) {
-      const lat = parseFloat(a[0].replace(",", "."));
-      const long = parseFloat(a[1].replace(",", "."));
+      const name = a[0];
+      const lat = parseFloat(a[1]);
+      const long = parseFloat(a[2]);
 
       const cord = new Coordinates(lat, long);
-      const n1 = new Nutriente("Ca", "", parseFloat(a[2]));
-      const n2 = new Nutriente("Mg", "", parseFloat(a[3]));
-      const n3 = new Nutriente("Na", "", parseFloat(a[4]));
-      const n4 = new Nutriente("K", "", parseFloat(a[5]));
-      const n5 = new Nutriente("Cl", "", parseFloat(a[6]));
-
+      const n1 = new Nutriente("Ca", "", parseFloat(a[3]));
+      const n2 = new Nutriente("Mg", "", parseFloat(a[4]));
+      const n3 = new Nutriente("Na", "", parseFloat(a[5]));
+      const n4 = new Nutriente("K", "", parseFloat(a[6]));
+      const n5 = new Nutriente("Cl", "", parseFloat(a[7]));
       const nutrinetes: Nutriente[] = [n1, n2, n3, n4, n5];
-      const amostra = new Amostra(cord, nutrinetes);
+      const amostra = new Amostra(name, cord, nutrinetes);
       this.amostras.push(amostra);
     }
     console.log(this.amostras);

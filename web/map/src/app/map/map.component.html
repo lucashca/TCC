@@ -1,10 +1,5 @@
-<agm-map
-  *ngIf="amostras.length > 0"
-  [latitude]="center.latitude"
-  [longitude]="center.longitude"
-  [zoom]="zoom"
-  (mapClick)="placeMarker($event)"
->
+<agm-map *ngIf="amostras.length > 0" [latitude]="center.latitude" [longitude]="center.longitude" [zoom]="zoom"
+  (mapClick)="placeMarker($event)">
   <!--  <agm-marker
     *ngFor="let m of userMarkers"
     [latitude]="m.latitude"
@@ -12,14 +7,10 @@
     [iconUrl]="userIcon"
   ></agm-marker>
   -->
-  <agm-marker
-    *ngFor="let m of amostras; index as i"
-    [latitude]="m.cord.latitude"
-    [longitude]="m.cord.longitude"
-    [iconUrl]="defaultIcon"
-  >
+  <agm-marker *ngFor="let m of amostras; index as i" [latitude]="m.cord.latitude" [longitude]="m.cord.longitude"
+    [iconUrl]="defaultIcon">
     <agm-info-window #info [disableAutoPan]="true">
-      <h3>Amostra {{ i + 1 }}</h3>
+      <h3>Amostra {{ m.name}}</h3>
       <div class="card-info">
         <div class="info">Latitude: {{ m.cord.latitude }}</div>
         <div class="info">Longitude: {{ m.cord.longitude }}</div>

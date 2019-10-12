@@ -13,14 +13,15 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.neural_network import MLPRegressor
 from sklearn import metrics
 
-csv = pd.read_csv("dataSetCompleto.csv",usecols=[0,1,2,3,4,5,6])
+#csv = pd.read_csv("novdataset.csv",usecols=[1,2,3,4,5,6,7])
+csv = pd.read_csv("sela.csv",usecols=[0,1,2])
 
 
 def fixCsv(arr):
     #Corrige o dataset, convertendo strig para float e também coverte a unidade dos nutriente de mg/l para cmolc/dm3
     for data in arr:
-        data[0] = float(data[0].replace(',','.'))
-        data[1] = float(data[1].replace(',','.'))
+        data[0] = float(data[0])
+        data[1] = float(data[1])
         data[2] = round(float(data[2])/200.4,2) #Ca
         data[3] = round(float(data[3])/121.56,2) #Mg
         data[4] = round(float(data[4])/230,2) #Na
@@ -74,14 +75,17 @@ def normalizeData(dataSet):
     data = np.zeros(dataSet.shape)
     
     for i in range(dataSet.shape[1]):
-        data[:,i] = (abs(dataSet[:,i]) - minimos[i])/(maximos[i] - minimos[i])
+         data[:,i] = (abs(dataSet[:,i]) - minimos[i])/(maximos[i] - minimos[i])
+        #data[:,i] = abs(dataSet[:,i]/maximos[i])
     return data
 
 
 
 
 
-dataSet = np.array(fixCsv(csv.values))
+#dataSet = np.array(fixCsv(csv.values))
+dataSet = np.array(csv.values)
+
 maxValues = getMaxValues(dataSet)
 medias = getMedias(dataSet)
 maiorMedia = getMaiorMedia(dataSet,medias)
@@ -90,11 +94,11 @@ menorMedia = getMenorMedia(dataSet,medias)
 
 data = normalizeData(dataSet)
 
-dataFrameOriginal = pd.DataFrame({"Latitude":dataSet[:,0],"Longitude":dataSet[:,1],"Ca":dataSet[:,2],"Mg":dataSet[:,3],"Na":dataSet[:,4],"K":dataSet[:,5],"Cl":dataSet[:,6]})
-dataFrameNormalizado = pd.DataFrame({"Latitude":data[:,0],"Longitude":data[:,1],"Ca":data[:,2],"Mg":data[:,3],"Na":data[:,4],"K":data[:,5],"Cl":data[:,6]})
+#dataFrameOriginal = pd.DataFrame({"Latitude":dataSet[:,0],"Longitude":dataSet[:,1],"Ca":dataSet[:,2],"Mg":dataSet[:,3],"Na":dataSet[:,4],"K":dataSet[:,5],"Cl":dataSet[:,6]})
+#dataFrameNormalizado = pd.DataFrame({"Latitude":data[:,0],"Longitude":data[:,1],"Ca":data[:,2],"Mg":data[:,3],"Na":data[:,4],"K":data[:,5],"Cl":data[:,6]})
 
-dataColun = 3
-xTrain, xTest, yTrain, yTest = train_test_split(data[:,0:2], data[:,dataColun], test_size = 0.4, random_state = 0)
+dataColun = 2
+xTrain, xTest, yTrain, yTest = train_test_split(data[:,0:2], data[:,dataColun], test_size = 0.25, random_state = 0)
 
 
 regression = [
@@ -125,33 +129,32 @@ regression = [
 for i in range(100):
     regression.append(["Decision Tree Regression %.1f"%i, DecisionTreeRegressor(max_depth=i+1)]),
     regression.append(["Random Forrest Regressor %.1f"%i, RandomForestRegressor(max_depth=i+1, random_state=0,n_estimators=100)])
-    regression.append(["Mult Layer Perceptron",MLPRegressor(solver='lbfgs', learning_rate ="adaptive",alpha=1,hidden_layer_sizes=(i+1), random_state=1)],
-    )
+    regression.append(["Mult Layer Perceptron",MLPRegressor(solver='lbfgs', learning_rate ="adaptive",alpha=1e-10,hidden_layer_sizes=(i+1), random_state=1)])
 
 model = 0
-maior = 0
-maior2 = 0
 bestYpred = []
 regFunction = []
+
+maior = regression[0][1].fit(xTrain,yTrain).score(xTest,yTest)
+
 for i,reg in enumerate(regression):
-    print(reg[0])
-    reg[1].fit(xTest,yTest)
+    score = 0
+    reg[1].fit(xTrain,yTrain)
     yPred = reg[1].predict(xTest)
     score = reg[1].score(xTest,yTest)
     if score >= maior:
+        maior = score
         score2 = reg[1].score(xTrain,yTrain)
         #if score2 >= maior2:
         regFunction = reg
         model = reg[0]   
         bestYpred = yPred
         maior2 = score2
-        maior = score
+       
         
-
-    print(reg[0]+" Score: %.2f" % score)
-    print(reg[0]+" R-Sqared: %.2f" % r2_score(yTest, yPred))
-    print("Mean squared error: %.2f" % mean_squared_error(yTest, yPred))
-    print("**************\n\n")
+    #print(reg[0]+" Score: %.2f" % score)
+    #print("Mean squared error: %.2f" % mean_squared_error(yTest, yPred))
+    print("**************")
 
 
 regression = regFunction[1]
@@ -161,19 +164,15 @@ regression.fit(xTrain,yTrain)
 yPred = regression.predict(xTest)
 
 
-
 print("Melhor: ",regFunction[0])
 print("Score: ",maior)
-print("Score2: ",maior2)
-
-print("Mean squared error: %.2f" % mean_squared_error(yTest, yPred))
+print("Mean squared error: %.5f" % mean_squared_error(yTest, yPred))
 print("Explained Variance Score	 : %.2f" % metrics.explained_variance_score(yTest,yPred))    
 print("Max Error	 : %.2f" % metrics.max_error(yTest,yPred))    
 print("Mean Absolute Error	 : %.2f" % metrics.mean_absolute_error(yTest,yPred))    
 print("Mean Squared Error	 : %.2f" % metrics.mean_squared_error(yTest,yPred))    
-print("Mean Squared Log Error	 : %.2f" % metrics.mean_squared_log_error(yTest,yPred))    
-print("Median Absolute Error	 : %.2f" % metrics.median_absolute_error(yTest,yPred))    
-print("R2	 : %.2f" % metrics.r2_score(yTest,yPred))    
+
+
 
 
 #print("Mean squared error: %.2f"% mean_squared_error(yTest, yPred))
@@ -185,33 +184,47 @@ print("R2	 : %.2f" % metrics.r2_score(yTest,yPred))
 #for i,prediction in enumerate(yPred):
 #    print("Predicted : %s, Target: %s" %(prediction,yTest[i]))
 
-'''
+
 fig = plt.figure()
 ax = fig.add_subplot(111, projection='3d')
 
 # Plot outputs
 
-ax.scatter(xTrain[:,0],xTrain[:,1], yTrain,  color='black')
+ax.scatter(xTrain[:,0],xTrain[:,1], yTrain,  c=yTrain,cmap="coolwarm")
 
 ax.set_xlabel('Latitude')
 ax.set_ylabel('Longitude')
 ax.set_zlabel('Correto')
 
-'''
+
+fig4 = plt.figure()
+
+ax4 = fig4.add_subplot(111, projection='3d')
+
+p = regression.predict(xTrain) 
+
+ax4.scatter(xTrain[:,0],xTrain[:,1], p,  c=p,cmap="coolwarm")
+
+ax4.set_xlabel('Latitude')
+ax4.set_ylabel('Longitude')
+ax4.set_zlabel('predito')
+
+
 fig2 = plt.figure()
 
-ax2 = fig2.add_subplot(111,projection="3d")
-ax2.scatter(xTest[:,0],xTest[:,1], yPred,c=yPred,cmap="coolwarm")
+
+ax2 = fig2.add_subplot(111)
+ax2.scatter(xTest[:,0], yPred,c=yPred,cmap="coolwarm")
 ax2.set_xlabel('Latitude')
-ax2.set_ylabel('Longitude')
+ax2.set_ylabel('Predito')
 #ax2.set_zlabel('Predito')
 
 fig3 = plt.figure()
-ax3 = fig3.add_subplot(111,projection="3d")
+ax3 = fig3.add_subplot(111)
 
-ax3.scatter(xTest[:,0],xTest[:,1], yTest,c=yTest,cmap="coolwarm")
+ax3.scatter(xTest[:,0], yTest,c=yTest,cmap="coolwarm")
 ax3.set_xlabel('Latitude')
-ax3.set_ylabel('Longitude')
+ax3.set_ylabel('Correto')
 #ax3.set_zlabel('Correto')
 
 
