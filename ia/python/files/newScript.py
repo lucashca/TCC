@@ -65,17 +65,20 @@ def normalizeData(dataSet):
    
 
 
-def run(regression,totalIter,name):
-
+def run(regression,totalIter,name,dataSetNormalizada,yColunm,rand):
+    global menorError,melhorModel,melhorR2
+    xTrain,xTest,yTrain,yTest = train_test_split(dataSetNormalizada[:,:2],dataSetNormalizada[:,yColunm],test_size=0.3,random_state=rand)
+        
+          
     model = regression[0][1]
     model.fit(xTrain,yTrain)
     yPred = model.predict(xTest)
     #score = r2_score(yTest,yPred)
     #maior = score
-    menorError = mean_squared_error(yTest,yPred)
+    #menorError = mean_squared_error(yTest,yPred)
     bestModel = regression[0]
     rscore = r2_score(yTest,yPred)
-            
+    mError =   metrics.max_error(yTest,yPred)
     atual = 0
     for i,reg in enumerate(regression):
         try:
@@ -99,10 +102,11 @@ def run(regression,totalIter,name):
 
             if erro < menorError:
                 rscore = r2_score(yTest,yPred)
-            
+                mError =   metrics.max_error(yTest,yPred)
                 menorError = erro
                 bestModel = reg
-                
+                melhorModel = reg
+                melhorR2 = rscore
 
             '''
             if score > maior:
@@ -111,15 +115,23 @@ def run(regression,totalIter,name):
             '''
         except Exception as e:
             print()
-   
+
+
+    appendRow([name,bestModel[0],rscore,menorError,mError,bestModel[1]])
     return bestModel
 
 
-def mainWork(regression,totalIter,name):
+def mainWork(regression,name,dataSetNormalizada,rand,yColunm):
+   
+   
     try:
-        bestModel = run(regression,totalIter,name)
+        
+        totalIter = len(regression)
+        bestModel = run(regression,totalIter,name,dataSetNormalizada,yColunm,rand)
         model = bestModel[1]
         
+        
+
         model.fit(xTrain,yTrain)
         
         yPred = model.predict(xTest)
@@ -128,7 +140,6 @@ def mainWork(regression,totalIter,name):
         mse = mean_squared_error(yTest,yPred)
         maxError = metrics.max_error(yTest,yPred)
 
-        saveDump([bestModel[0],score,mse,maxError],name)
           
         ax = plt.subplot(321,projection='3d')
         ax.scatter(dataSetNormalizada[:,0],dataSetNormalizada[:,1],dataSetNormalizada[:,yColunm] ,c=dataSetNormalizada[:,yColunm] ,cmap="coolwarm")
@@ -189,51 +200,39 @@ def normalizeColumn(dataSet,column):
         d = dataSet[i][column]
         dataSet[i][column] = (d - minimo)/(maximo - minimo)
 
+
+def appendRow(data):
+    global row
+    row.append(data)
+
 def saveDump(data,name):
-    fname = "./dump/"+str(name)+".csv"
-    csv_file = open(fname, "w")
+    global row
+
+    csv_file = open("saida.csv", "w")
     c = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-    c.writerow(["Config","R2-Score","MSE","Max Error"])
-    c.writerow(data)
-  
+    c.writerow(["rand","Config","R2-Score","MSE","Max Error"])
+    for r in row:
+        c.writerow(r)
+
+
 ## Import DataSet
 csvFile = pd.read_csv("novdataset.csv",usecols=[1,2,3,4,5,6,7])
 csvFile = fixCsv(csvFile.values)
 dataSet = np.array(csvFile)
 
-
-#csvFile = pd.read_csv("sela.csv",usecols=[0,1,2])
-#dataSet = np.array(csvFile.values)
-
-
-## Converte para uma matrix do numpy
-## Normaliza o DataSet na faixa de 0 e 1
-#dataSetNormalizada = normalizeData(dataSet)
-#dataSetNormalizada = dataSet
-
-#dataSet[:,0] = preprocessing.normalize([dataSet[:,0]])
-#dataSet[:,1] = preprocessing.normalize([dataSet[:,1]])
-
-
-yColunm = 3
+yColunm = 2
 
 normalizeColumn(dataSet,0)
 normalizeColumn(dataSet,1)
 normalizeColumn(dataSet,yColunm)
 
-
-
-    
-
-
+  
 dataSetNormalizada = dataSet
 
+melhorModel = []
+melhorR2 = -1000
+menorError = 1000
 
-bestRandomState = [25,0,18,20,21,23,24,28,39]
-bestRandomState = [3,5] # With Mult-Layer Perceptron
-bestRandomState = [3,7,19,32] # With Random Forrest
-
-xTrain,xTest,yTrain,yTest = train_test_split(dataSetNormalizada[:,:2],dataSetNormalizada[:,yColunm],test_size=0.3,random_state=3)
 regression = []
 
 ACTIVATION_TYPES = ["relu",
@@ -243,66 +242,33 @@ SOLVER_TYPES = ["lbfgs"]
 ALPHA = [0.00001,0.001,0.01,0.1,1]
 LEARNING_RATE_TYPES = ["constant","invscaling","adaptative"]
 
-'''
-for activation in ACTIVATION_TYPES:
-    for solver in SOLVER_TYPES:
-        for alfa in ALPHA:
-            for lrt in LEARNING_RATE_TYPES:
-                for r in range(10):
-                    if lrt == "adaptative" and activation == "sgd":
-                        regression.append([[activation,solver,alfa,lrt,r],MLPRegressor(hidden_layer_sizes=(50,50,50),activation=activation,solver=solver,alpha=alfa,learning_rate=lrt,max_iter=1000,random_state=r)])
-                    elif not lrt == "adaptative" :
-                        regression.append([[activation,solver,alfa,lrt,r],MLPRegressor(hidden_layer_sizes=(20,20),activation=activation,solver=solver,alpha=alfa,learning_rate=lrt,max_iter=1000,random_state=r)])
-
-'''
 for depth in range(10):
     for r in range(10):
         #regression.append([[depth,r],DecisionTreeRegressor(max_depth=depth+1,random_state=r)])   
         for s in range(10):
-            regression.append([["RandomForestRegressor",depth,r,s],RandomForestRegressor(max_depth=depth+1, random_state=r,n_estimators=s+1)])
+            regression.append([["RandomForestRegressor",depth+1,r,s+1],RandomForestRegressor(max_depth=depth+1, random_state=r,n_estimators=s+1)])
+
+
+row = []
 
 
 
-#regression.append(["Kernel Ridge",KernelRidge()])
-'''
-C = [1e0, 1e1, 1e2, 1e3]
-gamma = np.logspace(-2, 2, 5)
-alpha = [1e0, 0.1, 1e-2, 1e-3]
-kernel = ["rbf","linear","poly"]
-for k in kernel:
-    for cpar in C:
-        for g in gamma:
-            for d in range(10):
-                regression.append(["SVR",SVR(kernel=k,degree=d,gamma=g, C=cpar,max_iter=10000)])
-            
 
-'''
-#regression = []
-#regression.append([["RandomForestRegressor",depth,r,s],RandomForestRegressor(max_depth=4, random_state=9,n_estimators=2)])
+def work(inicio,carga):
+    for j in range(carga):
+        i = inicio + j
+        mainWork(regression,"%d"%i,dataSetNormalizada,i,yColunm)
+        saveDump([],"")
 
-totalWorkers = 1
 
-worksize = int(len(regression)/totalWorkers) + 1
 
+totalWorkers = 3
+
+
+carga = 5
+inicio = 0
 for i in range(totalWorkers):
-    inicio = i*worksize
-    fim = i*worksize + worksize
-    if fim > len(regression) :
-        fim = len(regression) 
-    
-    t = Process(target=mainWork,args=(regression[inicio:fim],worksize,"Thread %d" %i))
+    inicio = i*carga
+    t = threading.Thread(target=work,args=(inicio,carga))
     t.start()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    

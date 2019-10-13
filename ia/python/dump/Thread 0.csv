@@ -1,0 +1,2 @@
+Config,R2-Score,MSE,Max Error
+"['RandomForestRegressor', 5, 3, 2]",0.10930439833243721,0.017398508428483,0.6262244152046783
