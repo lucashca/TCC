@@ -13,7 +13,7 @@ import { HttpClient } from "@angular/common/http";
 export class MapService {
   markers: Coordinates[] = [];
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient) { }
 
   setMarkers() {
     for (let c of cords) {
@@ -26,4 +26,10 @@ export class MapService {
 
     return this.http.get("assets/dataset.json");
   }
+
+  getNutrienteData(lat, lng) {
+    let url = "http://localhost:8080";
+    return this.http.post(url, { latitude: lat, longitude: lng })
+  }
+
 }

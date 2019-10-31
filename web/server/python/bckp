@@ -1,0 +1,48 @@
+import http.server
+import socketserver
+import json
+import sys
+import cgi
+
+class my_handler(http.server.SimpleHTTPRequestHandler):
+
+    def _set_headers(self):
+        self.send_response(200)
+        self.send_header('Content-type', 'application/json')
+        self.send_header('Content-type', 'text/html')
+        
+    def do_HEAD(self):
+        self._set_headers()
+
+    def do_GET(self):
+        self._set_headers()
+        self.wfile.write(json.dumps({'hello': 'world', 'received': 'ok'}).encode("utf8"))
+    
+    def do_POST(self):
+        print("Post")
+        ctype, pdict = cgi.parse_header(self.headers.get('content-type'))
+
+        # read the message and convert it into a python dictionary
+        length = int(self.headers.get('content-length'))
+        message = json.loads(self.rfile.read(length))
+        # add a property to the object, just to mess with data
+        message['received'] = 'ok'
+      
+        print(message)
+        
+        # send the message back
+        self._set_headers()
+        self.wfile.write(json.dumps({'hello': 'world', 'received': 'ok'}).encode("utf8"))
+   
+
+PORT = int(sys.argv[1])
+
+try:
+   httpd = socketserver.ThreadingTCPServer(('', PORT), my_handler)
+ 
+   print ("servidor web rodando na porta ", PORT)
+   httpd.serve_forever()
+ 
+except KeyboardInterrupt:
+   print("Voce pressionou ^C, encerrando...")
+   httpd.socket.close()
