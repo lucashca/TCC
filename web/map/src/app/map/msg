@@ -1,0 +1,24 @@
+Boa tarde professor,
+
+Gostaria de saber se a seguinte estratégia e válida? 
+
+Fiz algumas alterações no método de validação do meu modelo, desta vez fiz da forma correta,
+avaliando o modelo com a validação cruzada, utilizo o função GridSearchCV para tunar os hiper-parâmetros
+e logo após testo o melhor modelo obtido com os dados de treinos até estavam intocados. Após estas etapas,
+verifico que este modelo não apresenta um bom resultado para as variáveis de entrada, estas são a latitude e a longitude.
+
+Também, adicionei o parâmetro de elevação para a latitude e longitude no conjunto de dados, mesmo com esta nova característica os resultados continuam imprecisos. 
+
+Após estes testes consegui verificar que se eu adicionar o valor do nutriente cálcio junto com as outras caraterísticas de entrada o sistema começa a convergir e consegue realizar a predição dos outros nutrientes, sódio, magnésio e potássio. Porém, isto torna inviável para a proposta inicial, esta é a predição das informações dos nutrientes do solo com base em informações que podem ser encontradas de forma fácil, como no caso da latitude,longitude e elevação. O cálcio só pode ser obtido com a previa analise do solo.
+
+Para tentar contornar esta problemática, criei um algoritmo para predição do cálcio, de forma similar ao algoritmo K-Nearest Neighbors, porém com a diferença que não utilizo a média dos valores próximos, crio pesos para os k vizinhos sendo que o maior peso fica para o mais próximo e estes somados ficam igual a 1, logo após realizo a seguinte operação. 
+
+Ca_predito = Somatório(i = 1..k) {w[i]*n[i]}.
+Com w[i] e n[i] o peso e o valor do nutriente receptivamente do vizinho i.
+ 
+O valor do cálcio predito será próximo aos valores dos vizinhos e com um erro médio quadrado aceitável em relação as faixas de valores de entrada que o sistema Adubatec apresenta. Realizei processos de testes para encontrar o menor erro quadrado dado um k, geralmente um k = 5 retorna um bom valor.
+
+Com isso é fornecido uma forma de obter o missing value do cálcio, logo o sistema apresentará todos os valores necessários para a entrada dos modelos de predição dos outros nutrientes
+
+Desculpe o incômodo e agradeço desde já.
+E agradeço desde já!
