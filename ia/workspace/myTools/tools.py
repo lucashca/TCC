@@ -47,7 +47,7 @@ def findBalancedDataSet(faixa,X,y,searchMethod,negRefit=False):
 
         print("%d / %d : Best Score: %.5f "%(cont,total,global_best_score))
     print()
-    print("Conluido - Best Score: %.5f Semente: %d "%(global_best_score,global_best_seed))
+    print("#Conluido - Best Score: %.5f Semente: %d "%(global_best_score,global_best_seed))
     return global_best_model,global_best_params,global_best_score,global_best_seed
 
 
@@ -61,8 +61,8 @@ def pltResults(best_model,x_index,X_train,X_test,y_train,y_test):
     mse_train = mean_squared_error(y_train,y_train_pred)
 
 
-    print("R2 Test: ",r2_test," MSE Test: ",mse_test)
-    print("R2 Train: ",r2_train," MSE Train: ",mse_train)
+    print("#R2 Test: ",r2_test," MSE Test: ",mse_test)
+    print("#R2 Train: ",r2_train," MSE Train: ",mse_train)
 
     plt.figure()
     plt.title("Dados de Test")
