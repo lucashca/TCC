@@ -37,15 +37,21 @@ export class MapComponent implements OnInit {
 
   getElevation(lat, lng) {
     let location = lat + ',' + lng
+    let elevation
     this.mapService.getElevation(location).subscribe(
-      res => { console.log(res); },
+      res => { elevation = res },
       err => {
         console.error(err);
+      },
+      () => {
+        let amostra = this.getKNeighbors(5, new Coordinates(lat, lng))
+        console.log(elevation)
+        amostra.elevation = elevation[0].elevation
+        this.getNutrienteData(lat, lng, amostra.elevation, amostra.nutrientes[0].value * 200.4)
       }
     )
 
   }
-
 
   getKNeighbors(k, cord) {
 
@@ -125,7 +131,7 @@ export class MapComponent implements OnInit {
     const n3 = new Nutriente("Na", "mg/l", nutre[2]);
     const n4 = new Nutriente("K", "mg/l", nutre[3]);
     const nutrinetes: Nutriente[] = [n1, n2, n3, n4];
-    let amostra = new Amostra("Predita", cord, 0, nutrinetes)
+    let amostra = new Amostra("Predita", cord, 0, nutrinetes, this.userIcon)
     return amostra
     //this.amostras.push(amostra)
 
@@ -175,9 +181,8 @@ export class MapComponent implements OnInit {
   placeMarker(event) {
 
     this.cont++;
-    let amostra = this.getKNeighbors(5, new Coordinates(event.coords.lat, event.coords.lng))
-    this.amostras.push(amostra)
-    this.metricas()
+    let elevation = this.getElevation(event.coords.lat, event.coords.lng)
+
 
   }
 
@@ -196,7 +201,7 @@ export class MapComponent implements OnInit {
     for (let n of amostra.nutrientes) {
       nut.push(this.cloneNutriente(n))
     }
-    return new Amostra(amostra.name, amostra.cord, amostra.elevation, nut)
+    return new Amostra(amostra.name, amostra.cord, amostra.elevation, nut, amostra.icon)
   }
 
   trainTestSlplit(dataSet: Amostra[], testSize: number) {
@@ -246,12 +251,12 @@ export class MapComponent implements OnInit {
       const n3 = new Nutriente("Na", "mg/l", this.convertNa(parseFloat(a[6])));
       const n4 = new Nutriente("K", "mg/l", this.convertK(parseFloat(a[7])));
       const nutrinetes: Nutriente[] = [n1, n2, n3, n4];
-      const amostra = new Amostra(name, cord, elevation, nutrinetes);
+      const amostra = new Amostra(name, cord, elevation, nutrinetes, this.defaultIcon);
       this.amostras.push(amostra);
     }
-    let res = this.trainTestSlplit(this.amostras, 0.3)
-    this.amostras = res[0]
-    this.test = res[1]
+    //let res = this.trainTestSlplit(this.amostras, 0.3)
+    //this.amostras = res[0]
+    //this.test = res[1]
   }
 
   predictDatas(amostras: Amostra[], k) {
@@ -334,8 +339,8 @@ export class MapComponent implements OnInit {
 
 
 
-  getNutrienteData(lat, lng) {
-    this.mapService.getNutrienteData(lat, lng).subscribe(
+  getNutrienteData(lat, lng, elevation, ca) {
+    this.mapService.getNutrienteData(lat, lng, elevation, ca).subscribe(
       r => {
         let res: any = r;
         const n1 = new Nutriente("Ca", "mg/l", this.convertCa(res.Ca));
@@ -345,8 +350,8 @@ export class MapComponent implements OnInit {
 
         const nutrinetes: Nutriente[] = [n1, n2, n3, n4];
         const cord = new Coordinates(lat, lng);
-        const elevation = 0;
-        const amostra = new Amostra("Consulta", cord, elevation, nutrinetes);
+        const elev = elevation;
+        const amostra = new Amostra("Consulta", cord, elev, nutrinetes, this.userIcon);
 
         this.amostras.push(amostra);
 

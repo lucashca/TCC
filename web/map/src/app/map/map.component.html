@@ -8,14 +8,13 @@
   ></agm-marker>
   -->
   <agm-marker *ngFor="let m of amostras; index as i" [latitude]="m.cord.latitude" [longitude]="m.cord.longitude"
-    [iconUrl]="defaultIcon">
+    [iconUrl]="m.icon">
     <agm-info-window #info [disableAutoPan]="true">
       <h3>Amostra {{ m.name}}</h3>
       <div class="card-info">
         <div class="info">Latitude: {{ m.cord.latitude }}</div>
         <div class="info">Longitude: {{ m.cord.longitude }}</div>
         <div class="info">Elevação: {{ m.elevation }}</div>
-
         <div class="info" *ngFor="let n of m.nutrientes">
           {{ n.name }}: {{ n.value.toFixed(3) }} {{ n.unidade }}
         </div>

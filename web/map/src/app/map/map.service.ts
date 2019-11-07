@@ -39,9 +39,9 @@ export class MapService {
     return this.http.get('https://api.jawg.io/elevations?locations=' + location + '&access-token=I0tZmMAxflhrsGdj0CfDBZEwFljBzlqcVQZz6cQPFfVecsCkmdGfi0odUi3HS7iD', this.httpOptions)
   }
 
-  getNutrienteData(lat, lng) {
+  getNutrienteData(lat, lng, elevations, ca) {
     let url = "http://localhost:8080";
-    return this.http.post(url, { latitude: lat, longitude: lng })
+    return this.http.post(url, { latitude: lat, longitude: lng, elevation: elevations, ca: ca })
   }
 
 }

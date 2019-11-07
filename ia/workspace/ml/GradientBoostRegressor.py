@@ -23,7 +23,9 @@ def GridSearchCVGradientBoostingRegressor(X_train,y_train):
     d = [10,20,30,40,50,60,70,80,90,100]
     e = [10,20,30,40,50,60,70,80,90,100]
     l = [2,4,5,11]
-
+    d = [10,50,80]
+    e = [10,50,80]
+    
   
     param_grid={
         'n_estimators':e,#[10,50,80], 
@@ -62,10 +64,10 @@ dataSet = loadMainDataSetWithElevation()
 
 y_column = 2 
 X = dataSet[:,0:4]
-y = dataSet[:,6]
+y = dataSet[:,5]
 
-'''
-best_model , best_params, best_score,best_seed = findBalancedDataSet(range(3,4),X,y,GridSearchCVGradientBoostingRegressor)
+
+best_model , best_params, best_score,best_seed = findBalancedDataSet(range(1,10),X,y,GridSearchCVGradientBoostingRegressor)
 
 print("#Best Params",best_params)
 print("#Best Score",best_score)
@@ -73,7 +75,7 @@ print("#Best Seed",best_seed)
 
 X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state=best_seed)
 pltResults(best_model,X.shape[1]-1,X_train,X_test,y_train,y_test)
-'''
+
 
 
 
@@ -98,7 +100,7 @@ def MELHOR_RESULTADO_MG():
     #R2 Test:  0.7641468991808511  MSE Test:  0.0037531633086605658
     #R2 Train:  0.8748115698686528  MSE Train:  0.003076693813010081
 
-MELHOR_RESULTADO_MG()
+    MELHOR_RESULTADO_MG()
 
 def MELHOR_RESULTADO_NA():
     X = dataSet[:,0:4]
@@ -109,7 +111,10 @@ def MELHOR_RESULTADO_NA():
     grid = GridSearchCV(model,param, cv=10,verbose=0,n_jobs=-1,scoring='r2',iid=True)
     grid.fit(X_train,y_train)
     best_model = grid.best_estimator_ 
+    print("Cross Validation  R2 Score :",grid.best_score_)
+    
     pltResults(best_model,1,X_train,X_test,y_train,y_test)
+    
     #Conluido - Best Score: 0.73448 Semente: 9 
     #Best Params {'learning_rate': 0.05, 'max_depth': 10, 'max_features': 2, 'min_samples_leaf': 5, 'n_estimators': 50, 'random_state': 0}
     #Best Score 0.734480868500437
@@ -133,7 +138,7 @@ def MELHOR_RESULTADO_K():
     #R2 Test:  0.6772838242726009  MSE Test:  0.0078083038481006
     #R2 Train:  0.9892885578561049  MSE Train:  0.00025464662511601085
     
-MELHOR_RESULTADO_K()
+    MELHOR_RESULTADO_K()
 
 
 ############### MG ##########################

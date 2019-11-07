@@ -26,6 +26,15 @@ def loadMainDataSetWithElevation():
     normalizeColumn(dataSet, 6)
     return dataSet
 
+def loadMainDataSetWithElevationWithoutNormalization():
+
+    csvFile = pd.read_csv("../datasets/DataSetWithElevation.csv", usecols=[1, 2, 3, 4, 5, 6,7])
+    print(csvFile.head(2))
+    dataSet = np.array(csvFile.values)
+    
+    return dataSet
+
+
 
 def loadMainDataSet():
 
