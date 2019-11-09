@@ -24,7 +24,7 @@ def getMax(dataSet,column):
 def train_validation_test_split(X,y,test_size=0.2,validation_size=0.2,random_state=0):
     '''This function return the train,validation and test data'''
     X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=test_size,random_state=random_state)
-    X_train,X_val,y_train,y_val = train_test_split(X_train,y_train,test_size=validation_size)
+    X_train,X_val,y_train,y_val = train_test_split(X_train,y_train,test_size=validation_size,random_state=random_state)
     return X_train,X_val,X_test,y_train,y_val,y_test
 
 

@@ -7,35 +7,38 @@ import numpy as np
 from dataSetPreProcessing import train_validation_test_split
 from sklearn.model_selection import train_test_split
 from loadDataSet import loadMainDataSet,loadTesteDataSet,loadCompletDataSet,loadMainDataSetWithElevation
-from tools import verifyArgs,findBalancedDataSet,pltResults,pltCorrelation, pltLossGraph,pltShow,plotXY,getMetrics,plotLeanrningCurve,getBalancedDataSetIndexRandomState
+from tools import verifyArgs,plotLeanrningCurve,findBalancedDataSet,pltResults,pltCorrelation, pltLossGraph,pltShow,plotXY,getMetrics,getBalancedDataSetIndexRandomState
 
-from sklearn.metrics import r2_score,mean_squared_error,mean_absolute_error
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.metrics import r2_score,mean_squared_error
+from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.model_selection import GridSearchCV
 
+
+
+# Load data set
 dataSet,features_names,target_names = loadMainDataSetWithElevation()
-
-
-
 
 def getParamGrid():
     param_grid_half = {
         
-        'bootstrap': [True],
-        'max_depth': [None,10,50],
-        'max_features': ['auto','log2'],
-        'min_samples_leaf': [1,2,3,4],
-        'n_estimators':[10,50],
+        'n_estimators':[100], 
+        'learning_rate': [0.05], 
+        'max_depth':[None], 
+        'min_samples_leaf':[3,8], 
+        'max_features':['auto','log2'],
+        'loss':['ls']
     }
     param_grid_full = {
-        
-        'bootstrap': [True],
-        'max_depth': [None,10,50,100],
-        'max_features': ['auto','log2'],
-        'min_samples_leaf': [1,2,3,4],
-        'n_estimators':[10,50,100,200],
+
+        'n_estimators':[200], 
+        'learning_rate': [0.05,0.01], 
+        'max_depth':[None,50,100], 
+        'min_samples_leaf':[3,5,8], 
+        'max_features':['auto','log2'],
+        'loss':['ls','lad','huber','quantile']
     }
     return param_grid_half,param_grid_full
+
 
 
 def tuningParameters(model,param_grid,X_train,y_train,verbose=0):
@@ -55,7 +58,7 @@ def getBestSeed(X,y,faixa,verbose=0):
     seed = 0
     for i in faixa:
         X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state=i)
-        model = RandomForestRegressor(random_state=0)
+        model = GradientBoostingRegressor(random_state=0)
         best_model,best_params,best_score = tuningParameters(model,param_grid_half,X_train,y_train)
         if best_score>maior_score:
             maior_score = best_score
@@ -79,20 +82,19 @@ def runTest(target,verbose=0):
     X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state=seed)
         
     _,param_grid_full = getParamGrid()
-    tuningParameters(RandomForestRegressor(random_state=0),param_grid_full,X_train,y_train,verbose=verbose)
+    tuningParameters(GradientBoostingRegressor(random_state=0),param_grid_full,X_train,y_train,verbose=verbose)
 
     print("#Best Seed:",seed)
-
 
 
 def avaliateModel(model,X_train,X_val,X_test,y_train,y_val,y_test,param_key_loss,target,verbose=0,stepLoss=25):
 
     model.fit(X_train,y_train)
 
-    plotLeanrningCurve(X_train,X_val,y_train,y_val,model,param_key_loss,'mean_squared_error',legend_1="Treino",legend_2="Validação",verbose=1,step=25)
-    plotLeanrningCurve(X_train,X_test,y_train,y_test,model,param_key_loss,'mean_squared_error',legend_1="Treino",legend_2="Teste",verbose=1,step=25)
-    plotLeanrningCurve(X_train,X_val,y_train,y_val,model,param_key_loss,'r2',legend_1="Treino",legend_2="Validação",verbose=1,step=25)
-    plotLeanrningCurve(X_train,X_test,y_train,y_test,model,param_key_loss,'r2',legend_1="Treino",legend_2="Teste",verbose=1,step=25)
+    plotLeanrningCurve(X_train,X_val,y_train,y_val,model,param_key_loss,'mean_squared_error',legend_1="Treino",legend_2="Validação",verbose=1,step=stepLoss)
+    plotLeanrningCurve(X_train,X_test,y_train,y_test,model,param_key_loss,'mean_squared_error',legend_1="Treino",legend_2="Teste",verbose=1,step=stepLoss)
+    plotLeanrningCurve(X_train,X_val,y_train,y_val,model,param_key_loss,'r2',legend_1="Treino",legend_2="Validação",verbose=1,step=stepLoss)
+    plotLeanrningCurve(X_train,X_test,y_train,y_test,model,param_key_loss,'r2',legend_1="Treino",legend_2="Teste",verbose=1,step=stepLoss)
     
     
     y_train_pred = model.predict(X_train)
@@ -114,12 +116,13 @@ def avaliateModel(model,X_train,X_val,X_test,y_train,y_val,y_test,param_key_loss
 
     pltShow()
     
-   
+
+
 
 
 def MELHOR_MG():
-    params = {'random_state':0,'bootstrap': True, 'max_depth': None, 'max_features': 'auto', 'min_samples_leaf': 3, 'n_estimators': 500}
-    model = RandomForestRegressor(**params)
+    params = {'random_state':0,'learning_rate': 0.05, 'loss': 'lad', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 5, 'n_estimators': 500}
+    model = GradientBoostingRegressor(**params)
 
     X = dataSet[:,:4]
     y = dataSet[:,4]
@@ -127,81 +130,72 @@ def MELHOR_MG():
     X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state=9)
     X_train,X_val,y_train,y_val = train_test_split(X_train,y_train,test_size = 0.2,random_state=7) 
     avaliateModel(model,X_train,X_val,X_test,y_train,y_val,y_test,'n_estimators',0,verbose=1,stepLoss=25,)
-
-    #Best Seed 9
-    #Best score: 0.7392468312678826
-    #Best params: {'bootstrap': True, 'max_depth': None, 'max_features': 'auto', 'min_samples_leaf': 3, 'n_estimators': 50}
+   
+    #Best score: 0.784343255845013
+    #Best params: {'learning_rate': 0.05, 'loss': 'lad', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 3, 'n_estimators': 200}
+    #Best Seed: 9
     #Metricas para os dados de treino
-    #R-squared: 0.89478
-    #Mean Squared Error: 0.00274
+    #R-squared: 0.91386
+    #Mean Squared Error: 0.00225
     #Metricas para os dados de validação
-    #R-squared: 0.80952
-    #Mean Squared Error: 0.00351
+    #R-squared: 0.85533
+    #Mean Squared Error: 0.00267
     #Metricas para os dados de teste
-    #R-squared: 0.73546
-    #Mean Squared Error: 0.00421
-
+    #R-squared: 0.78551
+    #Mean Squared Error: 0.00341
 
 
 
 def MELHOR_NA():
-    params = {'random_state':0, 'bootstrap': True, 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 500}
-    model = RandomForestRegressor(**params)
+    params = {'random_state':0,'learning_rate': 0.05, 'loss': 'lad', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 5, 'n_estimators': 750}
+    model = GradientBoostingRegressor(**params)
 
     X = dataSet[:,:4]
     y = dataSet[:,5]
    
-    X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state=3)
-    X_train,X_val,y_train,y_val = train_test_split(X_train,y_train,test_size = 0.2,random_state=0) 
-    avaliateModel(model,X_train,X_val,X_test,y_train,y_val,y_test,'n_estimators',1,verbose=1,stepLoss=25,)
-    #Best score: 0.6317466186857145
-    #Best params: {'bootstrap': True, 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 100}
+    X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state=2)
+    X_train,X_val,y_train,y_val = train_test_split(X_train,y_train,test_size = 0.2,random_state=4) 
+    avaliateModel(model,X_train,X_val,X_test,y_train,y_val,y_test,'n_estimators',1,verbose=1,stepLoss=50,)
+   
+
+    #Best score: 0.6381105225190661
+    #Best params: {'learning_rate': 0.05, 'loss': 'lad', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 200}
     #Best Seed: 2
     #Metricas para os dados de treino
-    #R-squared: 0.94054
-    #Mean Squared Error: 0.00149
+    #R-squared: 0.89291
+    #Mean Squared Error: 0.00237
     #Metricas para os dados de validação
-    #R-squared: 0.63224
-    #Mean Squared Error: 0.00739
+    #R-squared: 0.59301
+    #Mean Squared Error: 0.00831
     #Metricas para os dados de teste
-    #R-squared: 0.79878
-    #Mean Squared Error: 0.00460
-
+    #R-squared: 0.69360
+    #Mean Squared Error: 0.00982
 
 def MELHOR_K():
-    params = {'random_state':0, 'bootstrap': True, 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 500}
-    model = RandomForestRegressor(**params)
+    params = {'random_state':0,'learning_rate': 0.05, 'loss': 'lad', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 5, 'n_estimators': 500}
+    model = GradientBoostingRegressor(**params)
 
     X = dataSet[:,:4]
     y = dataSet[:,6]
    
-    X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state=2)
+    X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state=3)
     X_train,X_val,y_train,y_val = train_test_split(X_train,y_train,test_size = 0.2,random_state=0) 
     avaliateModel(model,X_train,X_val,X_test,y_train,y_val,y_test,'n_estimators',2,verbose=1,stepLoss=25,)
-    #Best score: 0.6317466186857145
-    #Best params: {'bootstrap': True, 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 100}
-    #Best Seed: 2
+
     #Metricas para os dados de treino
-    #R-squared: 0.94418
-    #Mean Squared Error: 0.00131
+    #R-squared: 0.97014
+    #Mean Squared Error: 0.00061
     #Metricas para os dados de validação
-    #R-squared: 0.58730
-    #Mean Squared Error: 0.00872
+    #R-squared: 0.64843
+    #Mean Squared Error: 0.01276
     #Metricas para os dados de teste
-    #R-squared: 0.88894
-    #Mean Squared Error: 0.00299
+    #R-squared: 0.68464
+    #Mean Squared Error: 0.00763
 
-
-
-
-#Best score: 0.6445667797493434
-#Best params: {'bootstrap': True, 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 200}
-#Best Seed: 3
-
-
-#MELHOR_NA()
+#runTest(6)
 #MELHOR_MG()
+#MELHOR_NA()
 MELHOR_K()
 
 
-#runTest(6)
+

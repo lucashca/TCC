@@ -11,6 +11,8 @@ import pandas as pd
 
 
 def loadMainDataSetWithElevation():
+    features_names = np.array(['Latitude','Longitude','Elevação','Cálcio'])
+    target_names = np.array(['Magnésio (Mg)','Sódio (Na)','Potássio (K)'])
 
     csvFile = pd.read_csv("../datasets/DataSetWithElevation.csv", usecols=[1, 2, 3, 4, 5, 6,7])
     print(csvFile.head(2))
@@ -24,7 +26,7 @@ def loadMainDataSetWithElevation():
     normalizeColumn(dataSet, 4)
     normalizeColumn(dataSet, 5)
     normalizeColumn(dataSet, 6)
-    return dataSet
+    return dataSet,features_names,target_names
 
 def loadMainDataSetWithElevationWithoutNormalization():
 
