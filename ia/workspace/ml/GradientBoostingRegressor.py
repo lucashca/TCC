@@ -172,7 +172,7 @@ def MELHOR_NA():
     #Mean Squared Error: 0.00982
 
 def MELHOR_K():
-    params = {'random_state':0,'learning_rate': 0.05, 'loss': 'lad', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 5, 'n_estimators': 500}
+    params = {'random_state':0,'learning_rate': 0.05, 'loss': 'lad', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 3, 'n_estimators': 500}
     model = GradientBoostingRegressor(**params)
 
     X = dataSet[:,:4]
@@ -181,16 +181,18 @@ def MELHOR_K():
     X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state=3)
     X_train,X_val,y_train,y_val = train_test_split(X_train,y_train,test_size = 0.2,random_state=0) 
     avaliateModel(model,X_train,X_val,X_test,y_train,y_val,y_test,'n_estimators',2,verbose=1,stepLoss=25,)
-
-    #Metricas para os dados de treino
-    #R-squared: 0.97014
-    #Mean Squared Error: 0.00061
-    #Metricas para os dados de validação
-    #R-squared: 0.64843
-    #Mean Squared Error: 0.01276
-    #Metricas para os dados de teste
-    #R-squared: 0.68464
-    #Mean Squared Error: 0.00763
+    #Best score: 0.7244096306794041
+    #Best params: {'learning_rate': 0.05, 'loss': 'lad', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 3, 'n_estimators': 200}
+    #Best Seed: 3
+   #Metricas para os dados de treino                                                                                      
+   # #R-squared: 0.98548                                                                                                    
+   # #Mean Squared Error: 0.00030                                                                                           
+   # #Metricas para os dados de validação                                                                                    
+   # #R-squared: 0.74249                                                                                                     
+   # #Mean Squared Error: 0.00935                                                                                            
+   # #Metricas para os dados de teste                                                                                        
+   # #R-squared: 0.71648                                                                                                     
+   # #Mean Squared Error: 0.00686   
 
 #runTest(6)
 #MELHOR_MG()
