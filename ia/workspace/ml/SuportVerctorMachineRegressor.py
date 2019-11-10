@@ -183,12 +183,18 @@ def MELHOR_K():
     X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state=3)
     X_train,X_val,y_train,y_val = train_test_split(X_train,y_train,test_size = 0.2,random_state=0) 
     avaliateModel(model,X_train,X_val,X_test,y_train,y_val,y_test,'max_iter',2,verbose=1,stepLoss=25)
-
-
-#Best score: 0.7409384454642772
-#Best params: {'C': 1.5, 'epsilon': 0.0001, 'gamma': 'scale', 'kernel': 'rbf', 'max_iter': -1, 'tol': 0.001}
-#Best Seed: 3
-
+    #Best score: 0.7409384454642771
+    #Best params: {'C': 1.5, 'epsilon': 0.0001, 'gamma': 'scale', 'kernel': 'rbf', 'max_iter': -1, 'tol': 0.001}
+    #Best Seed: 3
+    #Metricas para os dados de treino
+    #R-squared: 0.88285
+    #Mean Squared Error: 0.00241
+    #Metricas para os dados de validação
+    #R-squared: 0.67761
+    #Mean Squared Error: 0.01170
+    #Metricas para os dados de teste
+    #R-squared: 0.74512
+    #Mean Squared Error: 0.00617
 
 #runTest(4)
 
