@@ -19,6 +19,9 @@ from sklearn.model_selection import GridSearchCV
 dataSet,features_names,target_names = loadMainDataSetWithElevation()
 
 def getParamGrid():
+    '''Função que retorna os parâmetro utilizados para encontrar 
+    o conjunto de treino balanceado e também na tunagem.
+    '''
     param_grid_half = {
         
         'n_estimators':[100], 
@@ -42,7 +45,7 @@ def getParamGrid():
 
 
 def tuningParameters(model,param_grid,X_train,y_train,verbose=0):
-
+    '''Função que realiza o tuning de parâmetros e também a validação cruzada.'''
     reg =GridSearchCV(model, cv=10,param_grid=param_grid,verbose=verbose,n_jobs=-1,scoring='r2',iid=True)
     reg.fit(X_train,y_train)
     
@@ -53,6 +56,8 @@ def tuningParameters(model,param_grid,X_train,y_train,verbose=0):
 
 
 def getBestSeed(X,y,faixa,verbose=0):
+
+    '''Função responsável por retornar a semênte randômica para a replicação do conjunto de dados balanceado'''
     param_grid_half,_ = getParamGrid()
     maior_score = 0
     seed = 0
@@ -74,7 +79,7 @@ def getBestSeed(X,y,faixa,verbose=0):
     
 
 def runTest(target,verbose=0):
-
+     '''Executar a busca do melhor modelo para os conjuntos de entrada e o target'''
     X = dataSet[:,:4]
     y = dataSet[:,target]
     seed,score = getBestSeed(X,y,range(1,10),verbose=verbose)
@@ -88,13 +93,13 @@ def runTest(target,verbose=0):
 
 
 def avaliateModel(model,X_train,X_val,X_test,y_train,y_val,y_test,param_key_loss,target,verbose=0,stepLoss=25):
-
+    '''Função responsável por apresentar os resultados para cada modelo obtido.'''
     model.fit(X_train,y_train)
 
-    plotLeanrningCurve(X_train,X_val,y_train,y_val,model,param_key_loss,'mean_squared_error',legend_1="Treino",legend_2="Validação",verbose=1,step=stepLoss)
-    plotLeanrningCurve(X_train,X_test,y_train,y_test,model,param_key_loss,'mean_squared_error',legend_1="Treino",legend_2="Teste",verbose=1,step=stepLoss)
-    plotLeanrningCurve(X_train,X_val,y_train,y_val,model,param_key_loss,'r2',legend_1="Treino",legend_2="Validação",verbose=1,step=stepLoss)
-    plotLeanrningCurve(X_train,X_test,y_train,y_test,model,param_key_loss,'r2',legend_1="Treino",legend_2="Teste",verbose=1,step=stepLoss)
+    plotLeanrningCurve(X_train,X_val,y_train,y_val,model,param_key_loss,'mean_squared_error',legend_1="Treino",legend_2="Validação",verbose=verbose,step=stepLoss)
+    plotLeanrningCurve(X_train,X_test,y_train,y_test,model,param_key_loss,'mean_squared_error',legend_1="Treino",legend_2="Teste",verbose=verbose,step=stepLoss)
+    plotLeanrningCurve(X_train,X_val,y_train,y_val,model,param_key_loss,'r2',legend_1="Treino",legend_2="Validação",verbose=verbose,step=stepLoss)
+    plotLeanrningCurve(X_train,X_test,y_train,y_test,model,param_key_loss,'r2',legend_1="Treino",legend_2="Teste",verbose=verbose,step=stepLoss)
     
     
     y_train_pred = model.predict(X_train)

@@ -24,6 +24,8 @@ dataSet,features_names,target_names = loadMainDataSetWithElevation()
   
 
 def getParamGrid():
+    '''Função que retorna os parâmetro utilizados para encontrar 
+    o conjunto de treino balanceado e também na tunagem.'''
     param_grid_half = {        
         'kernel':['linear','rbf','sigmoid'],
         'gamma': ['scale','auto'], 
@@ -33,19 +35,18 @@ def getParamGrid():
         'C':[1.5, 10]
     }
     param_grid_full = {
-        
         'kernel':['linear','rbf','sigmoid'],
         'gamma': ['scale','auto',1e-7, 1e-4], 
         'tol':[1e-3,1e-5,1e-4,1e-2], 
         'epsilon':[1e-4],
         'max_iter':[-1],
         'C':[1.5, 10]
-}
+    }
     return param_grid_half,param_grid_full
 
 
 def tuningParameters(model,param_grid,X_train,y_train,verbose=0):
-
+    '''Função que realiza o tuning de parâmetros e também a validação cruzada.'''
     reg =GridSearchCV(model, cv=10,param_grid=param_grid,verbose=verbose,n_jobs=-1,scoring='r2',iid=True)
     reg.fit(X_train,y_train)
     
@@ -56,6 +57,8 @@ def tuningParameters(model,param_grid,X_train,y_train,verbose=0):
 
 
 def getBestSeed(X,y,faixa,verbose=0):
+    '''Função responsável por retornar a semênte randômica para a replicação do conjunto de dados balanceado'''
+     
     param_grid_half,_ = getParamGrid()
     maior_score = 0
     seed = 0
@@ -63,21 +66,21 @@ def getBestSeed(X,y,faixa,verbose=0):
         X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state=i)
         model = SVR()
         best_model,best_params,best_score = tuningParameters(model,param_grid_half,X_train,y_train)
-        if best_score>maior_score:
-            maior_score = best_score
-            seed = i
+    if best_score>maior_score:
+        maior_score = best_score
+        seed = i
 
-        y_train_pred = best_model.predict(X_train)
-     
+    y_train_pred = best_model.predict(X_train)
+
     if verbose:
         print("#Maior Score: ",maior_score)
         print("#Seed : ",seed)
-   
+
     return seed,maior_score
     
 
 def runTest(target,verbose=0):
-
+    '''Executar a busca do melhor modelo para os conjuntos de entrada e o target'''
     X = dataSet[:,:4]
     y = dataSet[:,target]
     seed,score = getBestSeed(X,y,range(1,10),verbose=verbose)

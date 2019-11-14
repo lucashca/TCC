@@ -19,6 +19,9 @@ dataSet,features_names,target_names = loadMainDataSetWithElevation()
 
 
 def getParamGrid():
+    '''Função que retorna os parâmetro utilizados para encontrar 
+    o conjunto de treino balanceado e também na tunagem.
+    '''
     param_grid_half = {
         
         'bootstrap': [True],
@@ -39,7 +42,7 @@ def getParamGrid():
 
 
 def tuningParameters(model,param_grid,X_train,y_train,verbose=0):
-
+ '''Função que realiza o tuning de parâmetros e também a validação cruzada.'''
     reg =GridSearchCV(model, cv=10,param_grid=param_grid,verbose=verbose,n_jobs=-1,scoring='r2',iid=True)
     reg.fit(X_train,y_train)
     
