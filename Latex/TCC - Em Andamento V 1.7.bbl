@@ -1,0 +1,188 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.6 }
+
+\bibitem[Ara{\'u}jo, Pontes e Crespo 2018]{adubatec}
+\abntrefinfo{Ara{\'u}jo, Pontes e Crespo}{ARA{\'U}JO; PONTES; CRESPO}{2018}
+{ARA{\'U}JO, L. H.~C.; PONTES, L.~V.; CRESPO, M.~S. \emph{Sistema especialista
+  AdubaTec}. [S.l.]: https://adubatec-h.cnpmf.embrapa.br, 2018.}
+
+\bibitem[AWS 2019]{aws2019}
+\abntrefinfo{AWS}{AWS}{2019}
+{AWS. \emph{Ajuste do modelo: subajuste versus sobreajuste}. 2019.}
+
+\bibitem[Borges 2009]{borges2009recomendaccoes}
+\abntrefinfo{Borges}{BORGES}{2009}
+{BORGES, A. L.~B. \emph{Recomenda{\c{c}}{\~o}es de calagem e aduba{\c{c}}{\~a}o
+  para abacaxi, acerola, banana, laranja, tangerina, lima {\'a}cida, mam{\~a}o,
+  mandioca, manga e maracuj{\'a}}. [S.l.]: Embrapa Mandioca e Fruticultura
+  Tropical, 2009.}
+
+\bibitem[Breiman 2001]{breiman2001random}
+\abntrefinfo{Breiman}{BREIMAN}{2001}
+{BREIMAN, L. Random forests.
+\emph{Machine learning}, Springer, v.~45, n.~1, p. 5--32, 2001.}
+
+\bibitem[Camargo et al. 2017]{daprevisao}
+\abntrefinfo{Camargo et al.}{CAMARGO et al.}{2017}
+{CAMARGO, L. da S. et al. Previs{\~a}o da produtividade de pastagens a partir
+  de indicadores de solo.
+2017.}
+
+\bibitem[CLAESSEN 1997]{claessen1997manual}
+\abntrefinfo{CLAESSEN}{CLAESSEN}{1997}
+{CLAESSEN, M. E.~C. Manual de m{\'e}todos de an{\'a}lise de solo.
+\emph{Embrapa Solos-Documentos (INFOTECA-E)}, Rio de Janeiro: EMBRAPA-CNPS,
+  1997., 1997.}
+
+\bibitem[Dias et al. 2016]{da2016prediccao}
+\abntrefinfo{Dias et al.}{DIAS et al.}{2016}
+{DIAS, L.~M. da S. et al. Predi{\c{c}}{\~a}o de classes de solo por
+  minera{\c{c}}{\~a}o de dados em {\'a}rea da bacia sedimentar do s{\~a}o
+  francisco.
+\emph{Pesquisa Agropecu{\'a}ria Brasileira}, v.~51, n.~9, p. 1396--1404, 2016.}
+
+\bibitem[Faceli et al. 2011]{faceli2011inteligencia}
+\abntrefinfo{Faceli et al.}{FACELI et al.}{2011}
+{FACELI, K. et al. Intelig{\^e}ncia artificial: Uma abordagem de aprendizado de
+  m{\'a}quina.
+2011.}
+
+\bibitem[Garc{\'\i}a, Luengo e Herrera 2015]{garcia2015data}
+\abntrefinfo{Garc{\'\i}a, Luengo e Herrera}{GARC{\'I}A; LUENGO; HERRERA}{2015}
+{GARC{\'I}A, S.; LUENGO, J.; HERRERA, F. \emph{Data preprocessing in data
+  mining}. [S.l.]: Springer, 2015.}
+
+\bibitem[Giarratano e Riley 1998]{giarratano1998expert}
+\abntrefinfo{Giarratano e Riley}{GIARRATANO; RILEY}{1998}
+{GIARRATANO, J.~C.; RILEY, G. \emph{Expert systems}. [S.l.]: PWS publishing
+  co., 1998.}
+
+\bibitem[Hastie et al. 2005]{hastie2005elements}
+\abntrefinfo{Hastie et al.}{HASTIE et al.}{2005}
+{HASTIE, T. et al. The elements of statistical learning: data mining, inference
+  and prediction.
+\emph{The Mathematical Intelligencer}, Springer, v.~27, n.~2, p. 83--85, 2005.}
+
+\bibitem[Helfer et al. 2019]{helfer2019tellus}
+\abntrefinfo{Helfer et al.}{HELFER et al.}{2019}
+{HELFER, G. et al. Tellus: um modelo computacional para a predi{\c{c}}{\~a}o da
+  fertilidade do solo na agricultura de precis{\~a}o.
+2019.}
+
+\bibitem[Henderson 2009]{henderson2009encyclopedia}
+\abntrefinfo{Henderson}{HENDERSON}{2009}
+{HENDERSON, H. \emph{Encyclopedia of computer science and technology}. [S.l.]:
+  Infobase Publishing, 2009.}
+
+\bibitem[Hunter 2007]{hunter2007matplotlib}
+\abntrefinfo{Hunter}{HUNTER}{2007}
+{HUNTER, J.~D. Matplotlib: A 2d graphics environment.
+\emph{Computing in science \& engineering}, IEEE Computer Society, v.~9, n.~3,
+  p.~90, 2007.}
+
+\bibitem[Kaufman e Michalski 1998]{kaufman1998discovery}
+\abntrefinfo{Kaufman e Michalski}{KAUFMAN; MICHALSKI}{1998}
+{KAUFMAN, K.~A.; MICHALSKI, R.~S. Discovery planning: Multistrategy learning in
+  data mining.
+1998.}
+
+\bibitem[LIMA et al. 1984]{limaprojeto}
+\abntrefinfo{LIMA et al.}{LIMA et al.}{1984}
+{LIMA, M. et al. Projeto radambrasil--folha sd. 24 salvador.
+\emph{Brasil. Departamento Nacional da Produ{\c{c}}{\~a}o Mineral, Rio de
+  Janeiro. Levantamento de Recursos Naturais}, n.~24, 1984.}
+
+\bibitem[Machado 2015]{ViniciusPonte2015}
+\abntrefinfo{Machado}{MACHADO}{2015}
+{MACHADO, V.~P. Intelig{\^e}ncia artificial.
+2015.}
+
+\bibitem[Marcus 2013]{marcus2013automating}
+\abntrefinfo{Marcus}{MARCUS}{2013}
+{MARCUS, S. \emph{Automating knowledge acquisition for expert systems}. [S.l.]:
+  Springer Science \& Business Media, 2013. v.~57.}
+
+\bibitem[McDermott 1982]{mcdermott1982r1}
+\abntrefinfo{McDermott}{MCDERMOTT}{1982}
+{MCDERMOTT, J. R1: A rule-based configurer of computer systems.
+\emph{Artificial intelligence}, Elsevier, v.~19, n.~1, p. 39--88, 1982.}
+
+\bibitem[McKinney 2011]{mckinney2011pandas}
+\abntrefinfo{McKinney}{MCKINNEY}{2011}
+{MCKINNEY, W. pandas: a foundational python library for data analysis and
+  statistics.
+\emph{Python for High Performance and Scientific Computing}, v.~14, 2011.}
+
+\bibitem[Monard e Baranauskas 2003]{monard2003conceitos}
+\abntrefinfo{Monard e Baranauskas}{MONARD; BARANAUSKAS}{2003}
+{MONARD, M.~C.; BARANAUSKAS, J.~A. Conceitos sobre aprendizado de m{\'a}quina.
+\emph{Sistemas inteligentes-Fundamentos e aplica{\c{c}}{\~o}es}, v.~1, n.~1,
+  p.~32, 2003.}
+
+\bibitem[Nagelkerke et al. 1991]{nagelkerke1991note}
+\abntrefinfo{Nagelkerke et al.}{NAGELKERKE et al.}{1991}
+{NAGELKERKE, N.~J. et al. A note on a general definition of the coefficient of
+  determination.
+\emph{Biometrika}, Oxford University Press, v.~78, n.~3, p. 691--692, 1991.}
+
+\bibitem[Padilha e Carvalhalho 2017]{padilha2017mineracao}
+\abntrefinfo{Padilha e Carvalhalho}{PADILHA; CARVALHALHO}{2017}
+{PADILHA, V.~A.; CARVALHALHO, A. C. P. d.~L. \emph{Mineração de Dados em
+  Python}. [S.l.]: Universidade de São Paulo, Instituto de Ciências
+  Matemáticas e de Computação, 2017. v.~1.}
+
+\bibitem[Pedregosa et al. 2011]{pedregosa2011scikit}
+\abntrefinfo{Pedregosa et al.}{PEDREGOSA et al.}{2011}
+{PEDREGOSA, F. et al. Scikit-learn: Machine learning in python.
+\emph{Journal of machine learning research}, v.~12, n.~Oct, p. 2825--2830,
+  2011.}
+
+\bibitem[Quinlan 1986]{quinlan1986induction}
+\abntrefinfo{Quinlan}{QUINLAN}{1986}
+{QUINLAN, J.~R. Induction of decision trees.
+\emph{Machine learning}, Springer, v.~1, n.~1, p. 81--106, 1986.}
+
+\bibitem[RAIJ 1996]{b1996recomendaccoes}
+\abntrefinfo{RAIJ}{RAIJ}{1996}
+{RAIJ, B. van. \emph{Recomenda{\c{c}}{\~o}es de aduba{\c{c}}{\~a}o e calagem
+  para o Estado de S{\~a}o Paulo}. [S.l.]: IAC Campinas, 1996.}
+
+\bibitem[Russell e Norvig 2016]{russell2016artificial}
+\abntrefinfo{Russell e Norvig}{RUSSELL; NORVIG}{2016}
+{RUSSELL, S.~J.; NORVIG, P. \emph{Artificial intelligence: a modern approach}.
+  [S.l.]: Malaysia; Pearson Education Limited,, 2016.}
+
+\bibitem[Sammut e Webb 2011]{sammut2011encyclopedia}
+\abntrefinfo{Sammut e Webb}{SAMMUT; WEBB}{2011}
+{SAMMUT, C.; WEBB, G.~I. \emph{Encyclopedia of machine learning}. [S.l.]:
+  Springer Science \& Business Media, 2011.}
+
+\bibitem[Starnes, Yates e Moore 2010]{starnes2010practice}
+\abntrefinfo{Starnes, Yates e Moore}{STARNES; YATES; MOORE}{2010}
+{STARNES, D.~S.; YATES, D.; MOORE, D.~S. \emph{The practice of statistics}.
+  [S.l.]: Macmillan, 2010.}
+
+\bibitem[Teixeira 2014]{de2014inteligencia}
+\abntrefinfo{Teixeira}{TEIXEIRA}{2014}
+{TEIXEIRA, J. de F. \emph{Intelig{\^e}ncia artificial}. [S.l.]: Pia Sociedade
+  de S{\~a}o Paulo-Editora Paulus, 2014.}
+
+\bibitem[Tjur 2009]{tjur2009coefficients}
+\abntrefinfo{Tjur}{TJUR}{2009}
+{TJUR, T. Coefficients of determination in logistic regression models—a new
+  proposal: The coefficient of discrimination.
+\emph{The American Statistician}, Taylor \& Francis, v.~63, n.~4, p. 366--372,
+  2009.}
+
+\bibitem[Walt, Colbert e Varoquaux 2011]{van2011numpy}
+\abntrefinfo{Walt, Colbert e Varoquaux}{WALT; COLBERT; VAROQUAUX}{2011}
+{WALT, S. V.~D.; COLBERT, S.~C.; VAROQUAUX, G. The numpy array: a structure for
+  efficient numerical computation.
+\emph{Computing in Science \& Engineering}, IEEE Computer Society, v.~13, n.~2,
+  p.~22, 2011.}
+
+\end{thebibliography}

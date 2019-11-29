@@ -1,0 +1,76 @@
+\changetocdepth {4}
+\babel@toc {brazil}{}
+\babel@toc {brazil}{}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {1}\MakeTextUppercase {Introdu\IeC {\c c}\IeC {\~a}o}}{13}{chapter.1}
+\contentsline {section}{\numberline {1.1}Problem\IeC {\'a}tica}{15}{section.1.1}
+\contentsline {section}{\numberline {1.2}Justificativa}{15}{section.1.2}
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {2}\MakeTextUppercase {Objetivo Geral e Espec\IeC {\'\i }fico}}{18}{chapter.2}
+\contentsline {section}{\numberline {2.1}Objetivo Geral}{18}{section.2.1}
+\contentsline {section}{\numberline {2.2}Objetivo Espec\IeC {\'\i }fico}{18}{section.2.2}
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {3}\MakeTextUppercase {Metodologia}}{19}{chapter.3}
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {4}\MakeTextUppercase {Referencial Te\IeC {\'o}rico}}{22}{chapter.4}
+\contentsline {section}{\numberline {4.1}No\IeC {\c c}\IeC {\~o}es de Intelig\IeC {\^e}ncias Artificial}{22}{section.4.1}
+\contentsline {section}{\numberline {4.2}Sistemas Especialistas}{23}{section.4.2}
+\contentsline {section}{\numberline {4.3}Aprendizado de M\IeC {\'a}quina}{24}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Conjunto de Dados}{25}{subsection.4.3.1}
+\contentsline {subsubsection}{\numberline {4.3.1.1}Pr\IeC {\'e}-processamento de dados}{26}{subsubsection.4.3.1.1}
+\contentsline {paragraph}{\numberline {4.3.1.1.1}Dados ausentes e redundantes}{27}{paragraph.4.3.1.1.1}
+\contentsline {paragraph}{\numberline {4.3.1.1.2}Normaliza\IeC {\c c}\IeC {\~a}o de dados}{27}{paragraph.4.3.1.1.2}
+\contentsline {subsection}{\numberline {4.3.2}Erro e Precis\IeC {\~a}o}{28}{subsection.4.3.2}
+\contentsline {subsubsection}{\numberline {4.3.2.1}Classifica\IeC {\c c}\IeC {\~a}o}{28}{subsubsection.4.3.2.1}
+\contentsline {subsubsection}{\numberline {4.3.2.2}Regress\IeC {\~a}o}{31}{subsubsection.4.3.2.2}
+\contentsline {subsection}{\numberline {4.3.3}Problemas que podem ocorrer}{33}{subsection.4.3.3}
+\contentsline {subsubsection}{\numberline {4.3.3.1}Underfitting}{33}{subsubsection.4.3.3.1}
+\contentsline {subsubsection}{\numberline {4.3.3.2}Overfitting}{34}{subsubsection.4.3.3.2}
+\contentsline {subsection}{\numberline {4.3.4}Aprendizado Supervisionado}{35}{subsection.4.3.4}
+\contentsline {subsection}{\numberline {4.3.5}Aprendizado N\IeC {\~a}o-Supervisionado}{35}{subsection.4.3.5}
+\contentsline {section}{\numberline {4.4}T\IeC {\'e}cnicas de \textit {machine learnig}}{36}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}\IeC {\'A}rvore de Decis\IeC {\~a}o (Decision Trees)}{36}{subsection.4.4.1}
+\contentsline {subsection}{\numberline {4.4.2}Random Forrest}{38}{subsection.4.4.2}
+\contentsline {section}{\numberline {4.5}An\IeC {\'a}lise de Solo}{40}{section.4.5}
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {5}\MakeTextUppercase {Sistema AdubaTec}}{41}{chapter.5}
+\contentsline {section}{\numberline {5.1}Motiva\IeC {\c c}\IeC {\~a}o}{41}{section.5.1}
+\contentsline {section}{\numberline {5.2}Desenvolvimento do projeto}{42}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Cria\IeC {\c c}\IeC {\~a}o dos softwares do sistema }{43}{subsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.1.1}Web Service}{44}{subsubsection.5.2.1.1}
+\contentsline {subsubsection}{\numberline {5.2.1.2}Banco de dados}{44}{subsubsection.5.2.1.2}
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {6}\MakeTextUppercase {Sistema de predi\IeC {\c c}\IeC {\~a}o}}{45}{chapter.6}
+\contentsline {section}{\numberline {6.1}Conjunto de dados}{47}{section.6.1}
+\contentsline {section}{\numberline {6.2}Abordagens}{48}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}1\IeC {\textordfeminine } Abordagem}{48}{subsection.6.2.1}
+\contentsline {subsection}{\numberline {6.2.2}2\IeC {\textordfeminine } Abordagem}{49}{subsection.6.2.2}
+\contentsline {subsection}{\numberline {6.2.3}3\IeC {\textordfeminine } Abordagem}{49}{subsection.6.2.3}
+\contentsline {section}{\numberline {6.3}Aplica\IeC {\c c}\IeC {\~a}o das T\IeC {\'e}cnicas}{53}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Ferramentas utilizadas}{53}{subsection.6.3.1}
+\contentsline {subsection}{\numberline {6.3.2}Desenvolvimento}{54}{subsection.6.3.2}
+\contentsline {subsubsection}{\numberline {6.3.2.1}Importa\IeC {\c c}\IeC {\~a}o do conjunto de dados}{54}{subsubsection.6.3.2.1}
+\contentsline {subsubsection}{\numberline {6.3.2.2}Divis\IeC {\~a}o dos dados}{54}{subsubsection.6.3.2.2}
+\contentsline {subsubsection}{\numberline {6.3.2.3}Cria\IeC {\c c}\IeC {\~a}o do modelo}{55}{subsubsection.6.3.2.3}
+\contentsline {subsubsection}{\numberline {6.3.2.4}Balanceamento de dados}{56}{subsubsection.6.3.2.4}
+\contentsline {subsubsection}{\numberline {6.3.2.5}Tuning}{57}{subsubsection.6.3.2.5}
+\contentsline {subsubsection}{\numberline {6.3.2.6}Avalia\IeC {\c c}\IeC {\~a}o do modelo}{58}{subsubsection.6.3.2.6}
+\contentsline {subsubsection}{\numberline {6.3.2.7}Exportar modelo}{61}{subsubsection.6.3.2.7}
+\contentsline {section}{\numberline {6.4}Integra\IeC {\c c}\IeC {\~a}o}{61}{section.6.4}
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {7}\MakeTextUppercase {Resultado e Discuss\IeC {\~o}es}}{63}{chapter.7}
+\contentsline {section}{\numberline {7.1}An\IeC {\'a}lise de Overfitting e Underfitting}{68}{section.7.1}
+\setlength {\cftchapterindent }{0em} \setlength {\cftchapternumwidth }{\cftlastnumwidth }
+\contentsline {chapter}{\chapternumberline {8}\MakeTextUppercase {Considera\IeC {\c c}\IeC {\~o}es Finais}}{70}{chapter.8}
+\contentsline {section}{\numberline {8.1}Trabalhos Futuros}{70}{section.8.1}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\contentsline {chapter}{\uppercase {Refer\^encias}}{71}{section*.45}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\contentsline {chapter}{Anexos I}{73}{chapter*.46}
+\setlength {\cftchapterindent }{\cftlastnumwidth } \setlength {\cftchapternumwidth }{2em}
+\contentsline {chapter}{Anexos II}{75}{chapter*.47}
+\contentsfinish 

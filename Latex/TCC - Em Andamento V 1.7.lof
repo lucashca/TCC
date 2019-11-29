@@ -1,0 +1,29 @@
+\babel@toc {brazil}{}
+\babel@toc {brazil}{}
+\contentsline {figure}{\numberline {1}{\ignorespaces Diagrama dos passos utilizados na metodologia de desenvolvimento do trabalho \relax }}{19}{figure.caption.9}
+\contentsline {figure}{\numberline {2}{\ignorespaces Hierarquia do aprendizado de m\IeC {\'a}quia. Fonte:\cite {monard2003conceitos}\relax }}{25}{figure.caption.10}
+\contentsline {figure}{\numberline {3}{\ignorespaces (a) \textit {Underfitting} em um conjunto de dados; (b) modelo de dados balanceado que consiga interpretar o conjunto passado e (c) \textit {Overfitting} em um conjunto de dados. Fonte:\cite {aws2019}\relax }}{33}{figure.caption.15}
+\contentsline {figure}{\numberline {4}{\ignorespaces \IeC {\'A}rvore de decis\IeC {\~a}o para o problema de concess\IeC {\~a}o de empr\IeC {\'e}stimo do tabela \ref {tab:crivo_emprestimo}.\relax }}{37}{figure.caption.17}
+\contentsline {figure}{\numberline {5}{\ignorespaces Exibi\IeC {\c c}\IeC {\~a}o do algoritmo \textit {Random forrest} com suas \IeC {\'a}rvores de decis\IeC {\~o}es.\relax }}{39}{figure.caption.18}
+\contentsline {figure}{\numberline {6}{\ignorespaces Caso de uso do sistema AdubaTec\relax }}{43}{figure.caption.19}
+\contentsline {figure}{\numberline {7}{\ignorespaces P\IeC {\'a}gina web do sistema de predi\IeC {\c c}\IeC {\~a}o\relax }}{46}{figure.caption.21}
+\contentsline {figure}{\numberline {8}{\ignorespaces P\IeC {\'a}gina web do sistema de predi\IeC {\c c}\IeC {\~a}o\relax }}{47}{figure.caption.22}
+\contentsline {figure}{\numberline {9}{\ignorespaces Situa\IeC {\c c}\IeC {\~a}o ideal para predi\IeC {\c c}\IeC {\~a}o do c\IeC {\'a}lcio.\relax }}{52}{figure.caption.24}
+\contentsline {figure}{\numberline {10}{\ignorespaces Situa\IeC {\c c}\IeC {\~a}o incorreta para a predi\IeC {\c c}\IeC {\~a}o do c\IeC {\'a}lcio.\relax }}{53}{figure.caption.25}
+\contentsline {figure}{\numberline {11}{\ignorespaces Gr\IeC {\'a}fico 2D feito com a ferramenta \textit {\textbf {matplotlib}}\relax }}{60}{figure.caption.26}
+\contentsline {figure}{\numberline {12}{\ignorespaces Exemplo de curva de aprendizado. \textit {\textbf {matplotlib}}\relax }}{60}{figure.caption.27}
+\contentsline {figure}{\numberline {13}{\ignorespaces Diagrama de integra\IeC {\c c}\IeC {\~a}o do sistema\relax }}{62}{figure.caption.28}
+\contentsline {figure}{\numberline {14}{\ignorespaces Curva com o EMQ para o \textbf {magn\IeC {\'e}sio}\relax }}{64}{figure.caption.32}
+\contentsline {figure}{\numberline {15}{\ignorespaces Curva com o $R^2$ para o \textbf {magn\IeC {\'e}sio}\relax }}{64}{figure.caption.33}
+\contentsline {figure}{\numberline {16}{\ignorespaces Curva com o EMQ para o \textbf {s\IeC {\'o}dio}\relax }}{65}{figure.caption.34}
+\contentsline {figure}{\numberline {17}{\ignorespaces Curva com o $R^2$ para o \textbf {s\IeC {\'o}dio}\relax }}{65}{figure.caption.35}
+\contentsline {figure}{\numberline {18}{\ignorespaces Curva com o EMQ para o \textbf {pot\IeC {\'a}ssio}\relax }}{65}{figure.caption.36}
+\contentsline {figure}{\numberline {19}{\ignorespaces Curva com o $R^2$ para o \textbf {pot\IeC {\'a}ssio}\relax }}{66}{figure.caption.37}
+\contentsline {figure}{\numberline {20}{\ignorespaces Dados reais e preditos do \textbf {magn\IeC {\'e}sio} \relax }}{66}{figure.caption.38}
+\contentsline {figure}{\numberline {21}{\ignorespaces Dados reais e preditos do \textbf {s\IeC {\'o}dio} \relax }}{66}{figure.caption.39}
+\contentsline {figure}{\numberline {22}{\ignorespaces Dados reais e preditos do \textbf {pot\IeC {\'a}ssio} \relax }}{67}{figure.caption.40}
+\contentsline {figure}{\numberline {23}{\ignorespaces Grau de import\IeC {\^a}ncia das vari\IeC {\'a}veis de entrada \textbf {magn\IeC {\'e}sio}.\relax }}{67}{figure.caption.41}
+\contentsline {figure}{\numberline {24}{\ignorespaces Grau de import\IeC {\^a}ncia das vari\IeC {\'a}veis de entrada para o \textbf {s\IeC {\'o}dio}.\relax }}{68}{figure.caption.42}
+\contentsline {figure}{\numberline {25}{\ignorespaces Grau de import\IeC {\^a}ncia das vari\IeC {\'a}veis de entrada para o \textbf {pot\IeC {\'a}ssio}.\relax }}{68}{figure.caption.43}
+\contentsfinish 
+\contentsfinish 
