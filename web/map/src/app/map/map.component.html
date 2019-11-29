@@ -16,7 +16,7 @@
         <div class="info">Longitude: {{ m.cord.longitude }}</div>
         <div class="info">Elevação: {{ m.elevation }}</div>
         <div class="info" *ngFor="let n of m.nutrientes">
-          {{ n.name }}: {{ n.value.toFixed(3) }} {{ n.unidade }}
+          {{ n.name }}: {{ n.value.toFixed(2) }} {{ n.unidade }}
         </div>
       </div>
     </agm-info-window>

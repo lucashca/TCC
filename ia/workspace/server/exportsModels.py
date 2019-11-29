@@ -13,7 +13,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.model_selection import train_test_split
 
 
-dataSet = loadMainDataSetWithElevation()
+dataSet,_,_ = loadMainDataSetWithElevation()
 
 
 # Melhores modelos
@@ -23,51 +23,68 @@ dataSet = loadMainDataSetWithElevation()
 #6, 2, 'log2', True, 6, 33
 
 def MELHOR_RESULTADO_MG():
-    X = dataSet[:, 0:4]
+    X = dataSet[:, :4]
     y = dataSet[:, 4]
-    param = {'learning_rate': [0.05], 'max_depth': [50], 'max_features': [
-        'log2'], 'min_samples_leaf': [11], 'n_estimators': [60]}
+    params = {'random_state':0,'learning_rate': 0.05, 'loss': 'lad', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 5, 'n_estimators': 500}
+    model = GradientBoostingRegressor(**params)
+
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=9)
-    model = GradientBoostingRegressor(random_state=0)
-    grid = GridSearchCV(model, param, cv=10, verbose=0,
-                        n_jobs=-1, scoring='r2', iid=True)
-    grid.fit(X_train, y_train)
-    best_model = grid.best_estimator_
-    print("Cross Validation Mg  R2 Score :", grid.best_score_)
+        X, y, test_size = 0.2,random_state=9)
+
+    model.fit(X_train, y_train)
+
+    r2Teste = model.score(X_test,y_test)
+    r2Train = model.score(X_train,y_train)
+
     
-    return best_model
+    print("R2 Treino",r2Train)
+    print("R2 Teste",r2Teste)
+    
+
+    return model
+
+
 
 
 def MELHOR_RESULTADO_NA():
-    X = dataSet[:,0:4]
+    X = dataSet[:,:4]
     y = dataSet[:,5]
-    param = {'bootstrap': [True], 'max_depth': [10], 'max_features': ['log2'], 'min_samples_leaf': [2], 'n_estimators': [100]}
-    X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state=2)
-    model = RandomForestRegressor(random_state=0)
-    grid = GridSearchCV(model,param, cv=10,verbose=0,n_jobs=-1,scoring='r2',iid=True)
-    grid.fit(X_train,y_train)
-    best_model = grid.best_estimator_ 
-    print("Cross Validation  R2 Score :",grid.best_score_)
-   
+
+    params = {'random_state':0, 'bootstrap': True, 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 1, 'n_estimators': 500}
+    model = RandomForestRegressor(**params)
+
+    X_train,X_test,y_train,y_test = train_test_split(X,y,test_size = 0.2,random_state=3)
+    model.fit(X_train,y_train)
+
+    r2Teste = model.score(X_test,y_test)
+    r2Train = model.score(X_train,y_train)
+
     
-    return best_model
+    print("R2 Treino",r2Train)
+    print("R2 Teste",r2Teste)
+    
+     
+    return model
 
 
 def MELHOR_RESULTADO_K():
-    X = dataSet[:, 0:4]
+    X = dataSet[:, :4]
     y = dataSet[:, 6]
-    param = {'bootstrap': [True], 'max_depth': [10], 'max_features': [
-        'log2'], 'min_samples_leaf': [2], 'n_estimators': [60]}
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=3)
-    model = RandomForestRegressor(random_state=0)
-    grid = GridSearchCV(model, param, cv=10, verbose=0,
-                        n_jobs=-1, scoring='r2', iid=True)
-    grid.fit(X_train, y_train)
-    best_model = grid.best_estimator_
-    print("Cross Validation K R2 Score :", grid.best_score_)
-    return best_model
+
+    params = {'random_state':0,'learning_rate': 0.05, 'loss': 'lad', 'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 3, 'n_estimators': 500}
+    model = GradientBoostingRegressor(**params)
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2,random_state=3)
+    model.fit(X_train, y_train)
+    
+    r2Teste = model.score(X_test,y_test)
+    r2Train = model.score(X_train,y_train)
+
+    
+    print("R2 Treino",r2Train)
+    print("R2 Teste",r2Teste)
+    
+    return model
 
 joblib.dump(MELHOR_RESULTADO_MG(), './dumps/modelMg.joblib')
 

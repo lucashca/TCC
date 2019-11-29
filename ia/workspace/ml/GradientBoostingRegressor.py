@@ -79,7 +79,7 @@ def getBestSeed(X,y,faixa,verbose=0):
     
 
 def runTest(target,verbose=0):
-     '''Executar a busca do melhor modelo para os conjuntos de entrada e o target'''
+    '''Executar a busca do melhor modelo para os conjuntos de entrada e o target'''
     X = dataSet[:,:4]
     y = dataSet[:,target]
     seed,score = getBestSeed(X,y,range(1,10),verbose=verbose)
@@ -97,9 +97,9 @@ def avaliateModel(model,X_train,X_val,X_test,y_train,y_val,y_test,param_key_loss
     model.fit(X_train,y_train)
 
     plotLeanrningCurve(X_train,X_val,y_train,y_val,model,param_key_loss,'mean_squared_error',legend_1="Treino",legend_2="Validação",verbose=verbose,step=stepLoss)
-    plotLeanrningCurve(X_train,X_test,y_train,y_test,model,param_key_loss,'mean_squared_error',legend_1="Treino",legend_2="Teste",verbose=verbose,step=stepLoss)
+    #plotLeanrningCurve(X_train,X_test,y_train,y_test,model,param_key_loss,'mean_squared_error',legend_1="Treino",legend_2="Teste",verbose=verbose,step=stepLoss)
     plotLeanrningCurve(X_train,X_val,y_train,y_val,model,param_key_loss,'r2',legend_1="Treino",legend_2="Validação",verbose=verbose,step=stepLoss)
-    plotLeanrningCurve(X_train,X_test,y_train,y_test,model,param_key_loss,'r2',legend_1="Treino",legend_2="Teste",verbose=verbose,step=stepLoss)
+    #plotLeanrningCurve(X_train,X_test,y_train,y_test,model,param_key_loss,'r2',legend_1="Treino",legend_2="Teste",verbose=verbose,step=stepLoss)
     
     
     y_train_pred = model.predict(X_train)

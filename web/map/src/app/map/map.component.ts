@@ -32,7 +32,18 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     this.getDataSet();
-
+    this.getElevation(-12.747222222222199,
+      -40.2008333333333)
+    /*[
+       "PG-246",
+       -12.747222222222199,
+       -40.2008333333333,
+       225.90039,
+       6.55,
+       2.78,
+       2.51,
+       5.4
+   ],*/
   }
 
   getElevation(lat, lng) {
@@ -45,7 +56,6 @@ export class MapComponent implements OnInit {
       },
       () => {
         let amostra = this.getKNeighbors(5, new Coordinates(lat, lng))
-        console.log(elevation)
         amostra.elevation = elevation[0].elevation
         this.getNutrienteData(lat, lng, amostra.elevation, amostra.nutrientes[0].value * 200.4)
       }
@@ -343,15 +353,16 @@ export class MapComponent implements OnInit {
     this.mapService.getNutrienteData(lat, lng, elevation, ca).subscribe(
       r => {
         let res: any = r;
-        const n1 = new Nutriente("Ca", "mg/l", this.convertCa(res.Ca));
-        const n2 = new Nutriente("Mg", "mg/l", this.convertMg(res.Mg));
-        const n3 = new Nutriente("Na", "mg/l", this.convertNa(res.Na));
-        const n4 = new Nutriente("K", "mg/l", this.convertK(res.K));
+        const n1 = new Nutriente("Ca", "cmolc/dm3", this.convertCa(res.Ca));
+        const n2 = new Nutriente("Mg", "cmolc/dm3", this.convertMg(res.Mg));
+        const n3 = new Nutriente("Na", "cmolc/dm3", this.convertNa(res.Na));
+        const n4 = new Nutriente("K", "cmolc/dm3", this.convertK(res.K));
 
         const nutrinetes: Nutriente[] = [n1, n2, n3, n4];
         const cord = new Coordinates(lat, lng);
         const elev = elevation;
         const amostra = new Amostra("Consulta", cord, elev, nutrinetes, this.userIcon);
+
 
         this.amostras.push(amostra);
 
